@@ -1,0 +1,12 @@
+<div class="news-banner">
+	<ul>
+		<@mytag.ListNews name="rows" orderby="sortid ASC,id desc"  newsTypeID="31588"   ctid="65535"  pageMax="3" />
+		<#list rows as p>
+		<li>
+			<img src="${p.uploadname1}" alt="">
+			<h4>${p.name}</h4>
+		</li>
+		</#list>
+	</ul>
+</div>
+

@@ -1,0 +1,35 @@
+<#assign tpid="" />
+
+<#if page!="index">
+
+<#if RequestParameters["tpid"]?exists>
+	<#assign tpid>${RequestParameters["tpid"]?html}</#assign>
+
+<#else>
+	<#if ctid!="" || ctid!="0">
+		<#if sys=="Introduce">
+			<@mytag.listIntroduce    name="rows" orderby="sortid asc,id desc" ctid="${ctid}" frontRow="1"/>
+
+		<#elseif sys=="Products">
+			<@mytag.ListProductsType name="rows" orderby="sortid asc,id desc"  ctid="${ctid}" frontRow="0"/>
+
+		<#elseif sys=="Share">
+			<@mytag.ListShareType    name="rows" orderby="sortid asc,id desc"  ctid="${ctid}" frontRow="1"/>
+
+		<#elseif sys=="News">
+			<@mytag.ListNewsType     name="rows" orderby="sortid asc,id desc" ctid="${ctid}" frontRow="0"/>
+
+		<#elseif sys=="ContactUs">
+			<@mytag.listContactUs    name="rows" orderby="sortid asc,id desc" ctid="${ctid}" />
+
+		<#else>
+			参数sys错误！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+		</#if>
+
+		<#list rows as p>
+		<#assign tpid="${p.id}" />
+		</#list>
+	</#if>
+</#if>	
+
+</#if>

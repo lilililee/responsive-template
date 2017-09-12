@@ -1,0 +1,1176 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/style/main.css" rel="stylesheet" type="text/css" /> */
+
+// 3. 基础样式模块
+@import "base";
+$c1: #4481f6;
+$c2: #ff6b11;
+
+/*  header  */
+.header {
+	min-height: 50px;
+	.header-top {
+		
+
+	}
+
+	
+	.header-nav {		
+		ul {
+			@include clearfix;
+		}
+		li {
+			float: left;
+			position: relative;
+			
+			a {
+				display: block;
+				height: 100%;
+			}
+		}
+
+		
+		.header-dl-area {
+			display: none;
+			position: absolute;
+			z-index: 100;
+			top: 58px;
+			left: -68px;
+			background: #C1C0C0;
+			font-size: 14px;
+			width: 250px;
+			color: #fff;
+			font-weight: normal;
+
+			a {
+				@include ellipsis;
+				&:hover {
+					color: red;
+				}
+			}
+			dl {
+				position: relative;
+
+				&:hover {
+					.header-dd-area {
+						display: block;
+					}
+				}
+			}
+
+			dt {
+
+				padding: 5px 10px;
+
+
+			}
+		}
+
+		
+		.header-dd-area{
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 250px;
+			background: #C1C0C0;
+			width: 200px;
+
+			dd {
+				padding: 5px 10px;
+			}
+
+
+		}
+		
+
+	}
+
+	form.search-form {
+		background: url(../images/search.jpg) center center no-repeat ;
+		width: 180px;
+		height: 34px;
+		line-height: 34px;
+		margin-top: 16px;
+		display: inline-block;
+
+		.text {
+			width: 144px;
+			height: 100%;
+
+			vertical-align: top;
+			margin-right: -3px;
+			text-indent: 10px;
+			background: none;
+		}
+
+		.submit {
+			height: 100%;
+			width: 34px;
+			vertical-align: top;
+			cursor: pointer;
+			background:none;
+		}
+	}
+}
+
+
+/* banner */
+
+
+.banner {
+	position: relative;  /* 为了左右按钮定位 */
+	ul {
+		height: 5rem;
+
+		li {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.banner-page {
+		
+	}
+
+	.to-left, .to-right {
+		// display: none;
+		position: absolute;
+		top: 40%;
+		// width: 50px;
+		// height: 100px;
+		font-size: 40px;
+		//background: red;
+		cursor: pointer;
+	}
+
+	.to-left {
+		left: 5%;
+	}
+	.to-right {
+		right: 5%;
+	}
+
+	.btns {
+		position: absolute;
+		width: 100%;
+		text-align: center;		
+		bottom: 5%;
+
+		span {
+			display: inline-block;
+			width: 40px;
+			height: 4px;
+			background: #ddd;
+			margin: 5px;
+			//border-radius: 5px;
+			cursor: pointer;
+			
+		}
+
+		.active {
+			background: $c1;
+		}
+	}
+
+}
+
+
+/* content  */
+
+
+
+/* footer */
+
+.footer {
+	
+
+
+}
+
+
+// 分页主体内容
+.page-content {
+	overflow: hidden;
+	padding: 50px 0 ;
+}
+
+
+
+
+/* nav  */
+.nav {
+
+	float: left;
+	width: 250px;
+	
+	.nav-title {
+		
+	}
+
+	.main-type {
+		
+	}
+
+	dl {
+		
+		// &:hover {
+		// 	.child-type {
+		// 		display: block;
+		// 	}
+		// }
+	}
+
+
+	dl.active {
+		dt{
+			background: $c1;
+			color: #fff;
+		}
+
+		.child-type {
+			display: block;
+		}
+		
+	}
+
+	dt {
+		height: 40px;
+		position: relative;
+		line-height: 40px;
+		
+		border: 1px solid #ddd;
+		
+		&:hover {
+			background:$c1;
+			color: #fff;
+		}
+
+	}
+	
+	.child-type {	
+		display: none;
+	}
+
+
+	dd {
+		padding: 15px 0 15px 40px;
+		font-size: 12px;
+		&.active,
+		&:hover {
+			color: $c1;
+		}
+	}
+
+	a {
+		display: block;
+		height: 100%;
+	}
+
+	
+	
+}
+
+
+
+/* position  */
+.position {
+	@include clearfix;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 30px;
+	.lt {
+		
+		font-size: 24px;
+	}
+	.rt {
+		font-size: 12px;
+		margin-top: 25px;
+		line-height: 1;
+
+		i {
+			vertical-align: -1px;
+		}
+	}
+
+}
+
+/* public  */
+.public {
+	float: right;
+	width: 77%;
+
+
+
+}
+
+
+.public-area {
+	@include clearfix;
+	font-size: 14px;
+	line-height: 1.9;
+}
+
+/* pages  */
+.displayintroduce-area,
+.displayproducts-area,
+.displaynews-area,
+.displayhonor-area,
+.displaycase-area{
+	@extend .public-area;
+	img {
+		max-width: 100%;
+	}
+}
+
+
+
+
+
+
+
+/* pages  */
+
+.products-area {
+
+	ul {
+		overflow: hidden;
+		li {
+			float: left;
+			width: 33.33%;
+			text-align: center;
+			margin-bottom: 40px;
+			//padding: 0 10px 40px 10px;
+			
+			a {
+				display: block;
+
+			}
+
+			img {
+				width: 283px;
+				height: 236px;
+				display: block;
+				margin: auto;
+				border: 2px solid transparent;
+
+			}
+
+			h3 {
+				margin-top: 20px;
+				font-size: 14px;
+				line-height: 18px;
+				height: 36px;
+			}
+
+
+			&:hover {
+				img {
+					border-color: $c1;
+				}
+				
+			}
+
+
+
+			
+		}
+	}
+
+}
+
+
+
+
+
+.displayproducts-area {
+	.pro-brief {
+		text-align: center;
+	}
+
+	.pro-name {
+		font-size: 20px;
+		line-height: 60px;
+		color: $c1;
+	}
+
+}
+
+.news-area{
+
+	.date-news-style{
+		li {
+			@include clearfix;
+			padding-left: 84px;
+
+
+			.date {
+				width: 84px;
+				height: 84px;
+				margin-left: -84px;
+				background: #e7e7e7;
+				text-align: center;
+				float: left;
+				.day{
+					font-size: 24px;
+					margin-top: 20px;
+				}
+
+				.month {
+					font-size: 14px;
+					margin-top: 3px;
+				}
+			}
+
+			.text {
+				padding-left: 30px;
+
+				h3 {
+					line-height: 30px;
+					@include transition;
+					&:hover {
+						color: $c1;
+					}
+
+					a {
+						@include ellipsis;
+					}
+				}
+
+				.description {
+					line-height: 28px;
+					height: 28 *2px;
+					overflow: hidden;
+					color: #979797;
+					font-size: 14px;
+				}
+			}
+
+
+			& + li {
+				padding-top: 20px;
+				margin-top: 20px;
+				border-top: 1px dashed #d2d2d2;
+			}
+
+
+		}
+	}
+	
+
+	.image-text-news-style {
+		$imgWidth: 382px;
+		$imgHeight: 249px;
+		$imgScale: (200px / $imgHeight );
+		$imgScaleWidth: $imgWidth * $imgScale;
+		$imgScaleHeight: $imgHeight * $imgScale;
+		padding: 0 3px;
+
+		> li {	
+			position: relative;
+			@include clearfix;
+			padding-left: $imgScaleWidth;
+			
+			padding-bottom: 20px;
+			margin-bottom: 20px;
+			border-bottom: 1px dashed #fff;
+		}
+
+		
+		.img {
+			display: block;
+			float: left;
+			margin-left: -$imgScaleWidth;
+			width: $imgScaleWidth;
+			height: $imgScaleHeight;
+			max-width: none;
+		}
+
+		.text {
+			padding-left: 40px;
+
+			.title {
+				font-size: 18px;
+				line-height: 2;
+				@include transition;
+
+				a {
+					display: block;
+					@include ellipsis;
+				}
+
+				&:hover {
+					color: $c1;
+				}
+			}
+
+			.date {
+				font-size: 14px;
+				line-height: 2;
+				i {
+					margin-right: 5px;
+				}
+			}
+
+			.description {
+				font-size: 14px;
+				line-height: 26px;
+				height: 26px * 2;
+				overflow: hidden;
+			}
+
+			.more {
+				text-align: right;
+				margin-top: 40px;
+
+				a {
+					display: inline-block;
+					padding: 10px 20px;
+					font-size: 14px;
+					background: $c1;
+					color: #fff;
+				}
+			}
+		}
+
+		@media (max-width: 768px){
+			$imgScale: (110px / $imgHeight );
+			$imgScaleWidth: $imgWidth * $imgScale;
+			$imgScaleHeight: $imgHeight * $imgScale;
+
+
+
+			> li {	
+				padding-left: $imgScaleWidth;
+
+				padding-bottom: 10px;
+				margin-bottom: 10px;
+				border-bottom: 1px dashed #fff;
+			}
+
+
+			.img {
+				margin-left: -$imgScaleWidth;
+				width: $imgScaleWidth;
+				height: $imgScaleHeight;
+
+			}
+
+			.text {
+				padding-left: 10px;
+
+				.title {
+					font-size: 16px;
+					line-height: 1;
+
+				}
+
+				.date {
+					font-size: 12px;
+					line-height: 1.5;
+					i {
+						margin-right: 5px;
+					}
+				}
+
+				.description {
+					font-size: 12px;
+					line-height: 20px;
+					height: 20px * 2;
+					
+				}
+
+				.more {
+					
+					margin-top: 5px;
+
+					a {
+						
+						padding: 5px 10px;
+						font-size: 12px;
+						
+					}
+				}
+			}
+
+
+		}
+
+	}
+
+
+	.text-news-style {
+		.item-first {
+			border-bottom: 1px dashed #666;
+			h4 {
+				font-size: 20px;
+				color: $c1;
+				@include ellipsis;
+			}
+
+			.date {
+				color: #777;
+				font-size: 12px;
+				height: 20px;
+				line-height: 20px;
+				margin-top: 7px;
+			}
+			.brief {
+				height: 48px;
+				line-height: 24px;
+				font-size: 14px;
+				color: #666;
+				overflow: hidden;
+				
+			}
+
+			strong {
+				float: right;
+				font-weight: normal;
+				font-size: 14px;
+				margin-top: 7px;
+			}
+		}
+
+		.item {
+			height: 36px;
+			line-height: 36px;
+			font-size: 14px;
+			line-height: 36px;
+			color: #333;
+			span {
+				display: inline-block;
+				width: 0;
+				height: 0;
+				border: 5px solid transparent;
+				border-left-color: $c1;
+				margin-right: 5px;
+				vertical-align: middle;
+
+			}
+
+			a {
+				display: inline-block;
+				width: 65%;
+				@include ellipsis;
+				vertical-align: middle;
+				@include transition;
+				&:hover {
+					color: $c1; 	
+				}
+			}
+
+			strong{
+				color: #666;
+				float: right;
+				font-weight: normal;
+				vertical-align: middle;
+			}
+		}
+	}
+
+
+
+	
+
+}
+
+
+.displaynews-area{
+	@extend .public-area;
+	
+	.title {
+		text-align: center;
+		font-size: 24px;
+	}
+
+	.brief {
+		font-size: 12px;
+		
+		text-align: center;
+		font-weight: normal;
+		padding-top: 10px;
+	}
+
+	.text {
+		padding: 20px 10px;
+
+	}
+
+	@media (max-width: 768px) {
+
+		.title {
+			font-size: 18px;
+			line-height: 1.4;
+		}
+
+		.text {
+			font-size: 13px;
+			line-height: 1.4;
+			padding: 10px 5px;
+		}
+	}
+
+}
+
+.honor-area {
+	ul{
+		overflow: hidden;
+	}
+
+	li {
+		float: left;
+		width: 33.33%;
+		padding: 0 20px 10px 20px;
+		text-align: center;
+		list-style: none;
+		cursor: pointer;
+		img {
+			height: 200px;
+
+			border: 1px solid transparent;
+			@include transition;
+		}
+
+		h3 {
+			font-size: 14px;
+			line-height: 20px;
+			height: 40px;
+			margin-top: 5px;
+			@include transition;
+
+			
+
+
+		}
+
+		&:hover {
+			img {
+				border-color: $c1;
+			}
+
+			h3 {
+				color: $c1;
+			}
+		}
+	}
+}
+
+
+
+.displayhonor-area {
+	text-align: center;
+}
+
+.case-area {
+	li {
+		text-align: center;
+		width: 33.3%;
+		float: left;
+		margin-bottom: 20px;
+		&:hover {
+			h4{
+				color: #fff;
+				background: $c1;
+			}
+			
+		}
+		
+		img {
+			width: 100%;
+			height: 173px;
+			display: block;
+		}
+		
+		h4 {
+			font-size: 14px;
+			line-height: 40px;
+			
+
+		}
+
+
+		a {
+			display: inline-block;
+			border: 1px solid #eee;
+			width: 95%;   //由a控制宽度
+		}
+
+
+	}
+}
+
+
+
+
+
+
+
+
+/* 移动端样式  */
+.responsive-menu, .header-nav-phone,.nav-phone {
+	display: none;
+}
+
+@media (min-width: 768px) {
+
+}
+@media (min-width: 992px) {
+	
+}
+@media (min-width: 1200px) {
+	.responsive-menu {
+		display: none!important;    //js会设置该元素，导致在这个目录在小屏显示时切换回大屏不会消失
+	}
+
+
+}
+
+
+
+
+@media (max-width: 1200px) {
+
+
+
+}
+
+
+
+@media (max-width: 992px) {
+
+	.header-top,.header-nav ,.nav{
+		display: none;
+	}
+
+	
+
+
+	.header-nav-phone {
+		position: fixed;
+		top: 0;
+		height: 50px;
+		display: block;
+		width: 100%;
+		background: #fff;
+
+		z-index: 1000;
+		box-shadow: 0 0 2px rgba(0,0,0,0.25);
+		img {
+			height: 40px;
+			margin: 5px;
+		}
+		i {
+			color: #444;
+			cursor: pointer;
+			float: right;
+			font-size: 20px;
+			margin: 15px 25px 0 0;
+		}
+	}
+
+	.nav-phone {
+		float: right;
+		display: block;
+		cursor: pointer;
+		i {
+			margin-right: 12px;
+		}
+		
+	}
+
+
+
+
+	.responsive-menu {
+		position: fixed;
+		width: 100%;
+		top: 0;
+		background: rgba(0,0,0,0.55);
+		color: #444;
+		z-index: 2000;
+		min-height: 100%;
+
+		ul {
+			font-size: 15px;
+			height: 100%;
+			width: 60%;
+			background: #fff;
+			position: absolute;
+			right: -60%;
+			
+			
+
+		}
+
+		li {
+			padding: 12px 20px;
+			border-bottom: 1px solid #ddd;
+			&:hover {
+				background: #ddd;
+			}
+		}
+
+		li.active {
+			color: #901F1F;
+		}
+
+		a {
+			height: 100%;
+			display: block;
+		}
+		.child-type {
+
+			display: none;
+			margin-top: 10px;
+			color: #444;
+			p{
+				padding: 5px 30px;
+				border: none;
+				font-size: 13px;
+			}
+			p.active {
+				color: #901F1F;
+			}
+		}
+
+		.active .child-type{
+			display: block;
+		}
+	}
+
+	
+
+	.page-content {
+		min-height: 100px;
+	}
+	.public {
+		width: 100%;
+	}
+
+
+
+}
+
+
+@media (max-width: 768px) {
+	
+	
+
+	
+
+
+}
+
+@media (max-width: 600px) {
+	
+	
+
+
+}
+
+
+@media (max-width: 500px) {
+	
+
+}
+
+
+
+
+
+// 公共组件样式
+// 1. 上下翻页按钮
+.pagination-btn{
+	.page-turn {
+		margin: 30px 20px;
+		font-size: 14px;
+		a {
+			font-size: 13px;
+			@include transition;
+			&:hover {
+				color: $c1;
+			}
+		}
+
+		p {
+			margin: 0;
+		}
+	}
+	.page-print {
+		a {
+			font-size: 13px;
+		}
+	}
+
+
+	@media (max-width: 768px) {
+		.page-turn {
+			margin: 5px 0;
+			font-size: 12px;
+		}
+
+		.page-print {
+			font-size: 12px;
+		}
+	}
+}
+
+
+
+// 2. 产品翻页按钮
+#module_page_004{
+	text-align:center;
+	font-size:0;
+	padding-top:18px;
+	color: #444;
+	clear: both;
+	text-align: center; 
+	margin:  20px 0;
+
+}
+#module_page_004 a,
+#module_page_004 span{
+	font-size:12px;
+	display:inline-block;
+	*display:inline;
+	vertical-align:top;
+	margin:0 5px;
+	line-height:24px;
+}
+#module_page_004 span{
+	line-height:26px;
+}
+#module_page_004 a{
+	background:white;
+	border:1px solid #dddddd;
+}
+#module_page_004 select{
+	display: none;
+	background:white;
+	border:1px solid #dddddd;
+}
+#module_page_004 a{
+	width:auto!important;
+	width:24px;
+	min-width:24px;
+	text-align:center;
+	white-space:nowrap;
+}
+#module_page_004 a.other{
+	padding:0 7px;
+}
+#module_page_004 a.active,
+#module_page_004 a:hover{
+	background:$c1;
+	border-color:$c1;
+	color: #fff;
+}
+
+#module_page_004 .first,
+#module_page_004 .prev,
+#module_page_004 .next,
+#module_page_004 .last{
+	padding: 0 10px;
+	cursor: pointer;
+
+}
+
+
+@media (max-width: 768px) {
+
+
+	#module_page_004{
+		margin: 10px 0;
+	}
+}
+
+
+
+//产品搜索无结果时提示信息
+.no-result-info{
+	padding:30px;
+	font-size: 14px;
+	text-align: center;
+	h2 {
+		color: red;
+		margin-bottom: 20px;
+	}
+
+	a {
+		@include transition;
+		display: inline-block;
+
+		padding: 6px 20px;
+		border: 1px solid $c1;
+
+		&:hover {
+			color: #fff;
+			background: $c1;
+		}
+	}
+}
+
+
+//浮层图片显示和切换
+.hidden-box {
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#C8000000,endColorstr=#c8000000);  
+	background-color: rgba(0,0,0,0.8);
+	z-index: 9999;
+}
+
+.hidden-box .hidden-content {
+	position: absolute;  
+	top: 50%;
+	left: 50%; 
+	max-width: 90%;
+	max-height: 100%; 
+
+	line-height: 1.5;
+	font-size: 14px;
+	color: #fff;
+	text-align: center;    
+}
+
+.hidden-box > i {
+	position: absolute;
+	font-size: 30px;
+	color: #fff;
+	cursor: pointer;
+}
+
+.hidden-box img {
+	max-width: 100%;
+	max-height: 100%;
+	margin: 10px 0;
+}
+
+.hidden-box .close-btn {
+	top: 10px;
+	right: 10px;
+}
+.hidden-box .to-left-btn {
+	top: 48%;
+	left: 20px;
+	font-size: 40px;
+}
+.hidden-box .to-right-btn {
+	top: 48%;
+	right: 20px;
+	font-size: 40px;
+}
+
+
+
+
+
+

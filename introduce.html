@@ -1,0 +1,56 @@
+<#assign page="introduce"/>
+<#assign ctid="65535"/>
+<#assign sys="Introduce"/>
+<#assign cname="关于我们"/>
+<#assign ename="about us"/>
+
+<#include "inc/head.html">
+
+<body>
+  <#include "inc/header.html">
+  <#include "inc/banner.html">
+  <#include "inc/responsive_menu.html">
+
+  <div class="page-content">
+    <div class="wrap">
+      <#include "inc/nav.html">
+
+      <div class="public"> 
+
+        <#include "inc/position.html">
+
+        <#if tpid=="00000">
+        <div class="honor-area">
+
+          <@mytag.ListShare name="rows" orderby="sortid asc,id desc"   shareTypeID="" ctid="109798"  pageMax="12" classProFlag="1"/>
+          <ul>
+            <#list rows as p>
+            <li>
+              <img src="${p.big}" alt="${p.name}">
+              <h3>${p.name}</h3>
+            </li>
+            </#list>
+          </ul>
+          <#include "inc/module_page_004.html"/>
+          <@module_page_004/>
+        </div>
+
+        <#else>
+        <div class="${page}-area public-area">
+          <#include "inc/setList.html">
+          ${p.content}
+        </div>
+        </#if>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <#include "inc/footer.html">
+
+</body>
+
+</html>

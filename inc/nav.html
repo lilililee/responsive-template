@@ -1,0 +1,68 @@
+<div class="nav">
+	<div class="nav-title">
+		<h2>${cname}</h2>
+		<h3>${ename}</h3>
+	</div>
+
+	<div class="main-type">
+		<#if sys=="Introduce">
+		<@mytag.listIntroduce  frontRow="100"  name="rows" orderby="sortid asc,id desc" ctid="${ctid}"/>
+
+		<#elseif sys=="Products">
+		<@mytag.ListProductsType frontRow="100" name="rows" orderby="sortid asc,id desc"  ctid="${ctid}"/>
+
+		<#elseif sys=="Share">
+		<@mytag.ListShareType  frontRow="100"  name="rows" orderby="sortid asc,id desc"  ctid="${ctid}"/>
+
+		<#elseif sys=="News">
+		<@mytag.ListNewsType  frontRow="100"   name="rows" orderby="sortid asc,id desc" ctid="${ctid}"/>
+
+		<#elseif sys=="ContactUs">
+		<@mytag.listContactUs  frontRow="100"  name="rows" orderby="sortid asc,id desc" ctid="${ctid}"/>
+
+		<#else>
+		参数sys错误！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+		</#if>
+		<#if RequestParameters["fid"]?exists>
+		<#assign fid>${RequestParameters["fid"]}</#assign>
+		<#else>
+		<#assign fid=""/>
+		</#if>
+		<#list rows as p>
+		<dl class="<#if fid==p.id || tpid==p.id>active</#if>">
+			<dt>
+				<a href="${realpath}${page?replace('display','')}.html?tpid=${p.id}">
+					<#if sys=="Introduce" || sys=="ContactUs">${p.title}<#else>${p.name}</#if>
+				</a>
+				
+			</dt>
+			
+			<#if p.child?exists && p.child !="0">
+			<#if sys=="Products">
+			<@mytag.ListProductsType name="items" orderby="sortid asc,id desc"  ctid="${ctid}" fid="${p.id}"/>
+
+			<#elseif sys=="Share">
+			<@mytag.ListShareType    name="items" orderby="sortid asc,id desc"  ctid="${ctid}" fid="${p.id}"/>
+
+			<#elseif sys=="News">
+			<@mytag.ListNewsType     name="items" orderby="sortid asc,id desc" ctid="${ctid}" fid="${p.id}"/>
+			</#if>
+			
+			<div class="child-type">
+				<#list items as item>
+				<dd class="<#if tpid==item.id>active</#if>">
+					<a href="${realpath}${page?replace('display','')}.html?fid=${p.id}&tpid=${item.id}">${item.name}</a>
+				</dd>
+				</#list>
+			</div>
+
+			</#if>
+		</dl>
+		</#list>
+		
+
+	</div>
+
+	
+</div>
+

@@ -1,0 +1,47 @@
+<div class="footer">
+	<div class="wrap">
+		<div class="lt">
+			<dl>
+				<dt><a href="introduce.html">关于我们</a></dt>
+				<@mytag.listIntroduce name="rows" orderby=" sortid asc,id desc " ctid="65535" />
+				<#list rows as p>
+				<dd><a href="${realpath}introduce.html?tpid=${p.id}">${p.title}</a></dd>
+				</#list>
+			</dl>	
+			<dl>
+				<dt><a href="products.html">产品展示</a></dt>
+				<@mytag.ListProductsType name="rows" fid="0" orderby="sortid asc,id  desc" ctid="65535" />
+				<#list rows as p>
+				<dd><a href="${realpath}products.html?tpid=${p.id}">${p.name}</a></dd>
+				</#list>
+			</dl>
+			<dl>
+				<dt><a href="news.html">新闻中心</a></dt>
+				<@mytag.ListNewsType name="rows" ctid="65535" orderby="sortid ASC,id desc"  />
+				<#list rows as p>
+				<dd><a href="${realpath}news.html?tpid=${p.id}">${p.name}</a></dd>
+				</#list>
+			</dl>
+			<dl>
+				<dt><a href="contactus.html">联系我们</a></dt>
+				<@mytag.listContactUs name="rows" orderby=" sortid asc,id desc " ctid="65535" />
+				<#list rows as p>
+				<dd><a href="${realpath}contactus.html?tpid=${p.id}">${p.title}</a></dd>
+				</#list>
+			</dl>
+		</div>
+
+	</div>
+
+
+	<div class="copyright">
+		${website_copyright}
+	</div>
+
+</div>
+
+
+
+<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="${images}javascripts/touchEvent.js"></script>
+<script src="${images}javascripts/main.js"></script>

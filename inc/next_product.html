@@ -1,0 +1,47 @@
+
+
+<@mytag.viewNextRecordIdTag id="${id}" name="prev_id" classProFlag="1" typeId="${tpid}" ctid="${ctid}" flag="0" orderby="sortid desc,id asc"/>
+<@mytag.viewNextRecordIdTag id="${id}" name="next_id" classProFlag="1" typeId="${tpid}" ctid="${ctid}" flag="0" orderby="sortid asc,id desc"/>
+
+
+<#if prev_id!="0">
+<a class="prev_pro" href="${realpath}${page}.html?tpid=${tpid}&id=${prev_id}"> 
+	<i class="iconfont icon-fanhui"></i> 
+</a>
+</#if>
+
+<#if next_id!="0">
+<a class="next_pro" href="${realpath}${page}.html?tpid=${tpid}&id=${next_id}">
+	<i class="iconfont icon-gengduo1"></i>  
+</a>
+</#if>
+
+
+<style>
+	.img {
+		position: relative;
+	}
+
+	.img .prev_pro,.img .next_pro {
+		position: absolute;
+		top: 40%;
+		color: #8C8887;
+		
+		width: 50px;
+		height: 50px;
+		text-align: center;
+		line-height: 50px;
+		
+	}
+	.img .prev_pro {
+		left: 5%;
+	}
+
+	.img .next_pro {
+		right: 5%;
+	}
+
+	.img i {
+		font-size: 50px;
+	}
+</style>

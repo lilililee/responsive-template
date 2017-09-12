@@ -1,0 +1,48 @@
+<#assign page="contactus"/>
+<#assign ctid="109013"/>
+<#assign sys="ContactUs"/>
+<#assign cname="联系我们"/>
+<#assign ename="contact us"/>
+
+<#include "inc/head.html"> 
+<body>
+  <#include "inc/header.html">
+  <#include "inc/banner.html">
+  <#include "inc/responsive_menu.html">
+  
+  <div class="page-content">
+    <div class="wrap">
+
+      <#include "inc/nav.html">
+
+      <div class="public"> 
+
+        <#include "inc/position.html">
+
+        
+        <#if tpid=="00000">
+        <div class="${page}-area public-area">
+
+          <#include "inc/module_feedback_write_001.html">
+          <@module_feedback_write_001 sucessUrl="${realpath}${page}.html" failUrl="${realpath}${page}.html" ctid="65535" textareaWidth="50" sucessMessage="" failMessage="" isSendMail="false" receiveMailAddr="" mailSubject=""/>
+        </div>
+
+        <#else>
+        <div class="${page}-area public-area">
+          <#include "inc/setList.html">
+          ${p.content}
+        </div>
+        </#if>
+
+      </div>
+
+    </div>
+  </div>
+
+  
+
+  <#include "inc/footer.html">
+
+</body>
+
+</html>

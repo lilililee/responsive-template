@@ -1,0 +1,64 @@
+<#include "/public_include/zh-CN/load.html">
+
+<#include "setTpid.html">  
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<#assign title="${website_title}"/>
+
+	<#--  云平台写法-->
+	 
+	<#assign keywords="${seo_keyword}"/>
+	<#assign description="${seo_description}"/>  
+	
+	<#-- 
+	<#assign keywords="${website_keyword}"/>
+	<#assign description="${website_keyword_description}"/>
+	-->
+
+	<#if page!="index">
+		<#if tpid!="">
+			<#include "viewType.html">
+			<#assign typetitle><#if sys=="Introduce" || sys=="ContactUs">${p.title}<#else>${p.name}</#if></#assign>
+			<#if typetitle!="">
+			<#assign title="${typetitle}-${title}"/>
+			<#assign keywords="${typetitle},${keywords}"/>
+			</#if>
+		</#if>
+		
+		<#if RequestParameters["id"]?exists>
+		<#assign id>${RequestParameters["id"]}</#assign>
+		<#else>
+		<#assign id="" />
+		</#if>
+
+		<#if id!="">
+			<#if sys=="Products">
+			<@mytag.ViewProducts name="p" proID="${id}" />
+			<#elseif sys=="Share">
+			<@mytag.ViewShare name="p" shareID="${id}" />
+			<#elseif sys=="News">
+			<@mytag.ViewNews  name="p"  newsID="${id}" ctid="${ctid}"/>
+			</#if>
+			
+			<#assign idtitle>
+			<#if p.name?exists>${p.name}<#else>${p.title}</#if>
+			</#assign>
+			<#if idtitle!="">
+			<#assign title="${idtitle}-${title}"/>
+			<#assign keywords="${idtitle},${keywords}"/>
+			</#if>
+		</#if>
+	</#if>
+	
+	<title>${title}</title>
+	<meta name="keywords" content="${keywords}">
+	<meta name="description" content="${description}">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta name="viewport" content="initial-scale=1, width=device-width,minimum-scale=1, maximum-scale=1, user-scalable=no" />
+	<link href="//at.alicdn.com/t/font_qhf6zqu3wl6av2t9.css" rel="stylesheet"/>
+	<link href="${images}stylesheets/style.css" rel="stylesheet"/>
+</head>

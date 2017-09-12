@@ -1,0 +1,111 @@
+<#assign page="news"/>
+<#assign ctid="65535"/>
+<#assign sys="News"/>
+<#assign cname="新闻中心"/>
+<#assign ename="news"/>
+
+<#include "inc/head.html">   
+<body>
+  <#include "inc/header.html">
+  <#include "inc/banner.html">
+  <#include "inc/responsive_menu.html">
+  <div class="page-content wrap">
+
+    <#include "inc/nav.html">
+
+
+    <div class="public"> 
+
+      <#include "inc/position.html">
+
+      <div class="${page}-area">
+
+        <#include "inc/setList.html">
+
+        
+          <ul class="date-news-style">
+            <#list rows as p>
+            <li>
+              <div class="date">
+                <div class="day">${p.date[8..9]}</div>
+                <div class="month">${p.date[0..3]}/${p.date[5..6]}</div>
+              </div>
+              <div class="text">
+                <h3><a href="displaynews.html?tpid=${p.typeid}&id=${p.id}" target="_blank">${p.title}</a></h3>
+                <div class="description">${p.seodescription}</div>
+              </div>
+
+            </li>
+            </#list>
+          </ul>
+
+
+          <#-- 
+          
+          <ul class="image-text-news-style">
+           <#list rows as p>
+           <li>
+
+            <img class="img" src="${p.uploadname1}" alt="${p.title}">
+
+            <div class="text">
+              <h3 class="title"><a href="display${page}.html?tpid=${p.typeid}&id=${p.id}" target="_blank">${p.title}</a></h3>
+
+              <div class="date">
+                <i class="iconfont icon-shijian1"></i>${p.date}
+              </div>
+
+              <div class="description">
+                ${p.seodescription}
+              </div>
+
+              <div class="more"><a href="display${page}.html?tpid=${p.typeid}&id=${p.id}" target="_blank"><#if common_user_langid="1">查看详情<#else>VIEW MORE</#if></a></div>
+            </div>
+          </li>
+          </#list>
+        </ul>
+      -->
+
+
+      <#--
+      
+      <ul class="text-news-style">
+        <#list rows as p>
+
+        <li>
+          <#if p_index==0>
+          <div class="item-first">
+            <h4><a target="_blank" href="${realpath}display${page}.html?tpid=${tpid}&id=${p.id}">${p.title}</a></h4>
+            <div class="date"><i class="iconfont icon-shijian1"></i> ${p.date}</div>
+            <div class="brief">
+              ${p.seodescription}
+            </div>
+          </div>
+          <#else>
+          <div class="item"><span></span><a target="_blank" href="${realpath}display${page}.html?tpid=${tpid}&id=${p.id}">${p.title}</a><strong>${p.date}</strong></div>
+          </#if>
+
+        </li>
+        </#list>
+      </ul>
+
+    -->
+
+
+
+    <#include "inc/module_page_004.html"/>
+    <@module_page_004/>
+
+  </div>
+
+</div>
+
+</div>
+
+
+
+<#include "inc/footer.html">
+
+</body>
+
+</html>

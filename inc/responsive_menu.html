@@ -1,0 +1,88 @@
+<!-- html -->
+<div class="responsive-main-menu responsive-menu">
+	<ul>
+		<li>
+			<a href="${realpath}index.html">Home</a>
+		</li>
+
+		<li>
+			<a href="${realpath}introduce.html">About</a>
+		</li>
+
+		<li>
+			<a href="${realpath}products.html">Products</a>
+		</li>
+
+		<li>
+			<a href="${realpath}support.html">Support</a>
+		</li>
+
+		<li>
+			<a href="${realpath}news.html">News</a>				
+		</li>
+
+		<li>
+			<a href="${realpath}careers.html">Careers</a>			
+		</li>
+
+		<li>
+			<a href="${realpath}contactus.html">Contact</a>
+		</li>
+	</ul>
+</div>
+
+<div class="responsive-sub-menu responsive-menu">
+<#if page!="index">
+	<ul>
+		<#if sys=="Introduce">
+		<@mytag.listIntroduce    name="rows" orderby="sortid asc,id desc" ctid="${ctid}"/>
+
+		<#elseif sys=="Products">
+		<@mytag.ListProductsType name="rows" orderby="sortid asc,id desc"  ctid="${ctid}"/>
+
+		<#elseif sys=="Share">
+		<@mytag.ListShareType    name="rows" orderby="sortid asc,id desc"  ctid="${ctid}"/>
+
+		<#elseif sys=="News">
+		<@mytag.ListNewsType     name="rows" orderby="sortid asc,id desc" ctid="${ctid}"/>
+
+		<#elseif sys=="ContactUs">
+		<@mytag.listContactUs    name="rows" orderby="sortid asc,id desc" ctid="${ctid}"/>
+
+		<#else>
+		参数sys错误！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+		</#if>
+
+		<#if RequestParameters["fid"]?exists>
+		<#assign fid>${RequestParameters["fid"]}</#assign>
+		<#else>
+		<#assign fid=""/>
+		</#if>
+
+		<#list rows as p>
+		
+		<li>
+			<a href="${realpath}${page?replace('display','')}.html?tpid=${p.id}">
+				<#if sys=="Introduce" || sys=="ContactUs">${p.title}<#else>${p.name}</#if>
+			</a>
+
+			<#if p.child?exists && p.child !="0">
+			<div class="child-type">
+				<@mytag.ListProductsType name="items" orderby="sortid asc,id desc"  ctid="${ctid}" fid="${p.id}"/>
+				<#list items as item>
+				<p class="<#if tpid==item.id>active</#if>">
+				<a href="${realpath}${page?replace('display','')}.html?fid=${p.id}&tpid=${item.id}">${item.name}</a>
+				</p>
+				</#list>
+			</div>
+
+			</#if>		
+			
+		</li>
+		
+		</#list>
+	</ul>
+</#if>
+</div>
+
+

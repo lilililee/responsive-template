@@ -1,0 +1,97 @@
+<#assign page="products"/>
+<#assign ctid="65535"/>
+<#assign sys="Products"/>
+<#assign cname="搜索结果"/>
+<#assign ename="result"/>
+
+<#include "inc/head.html">  
+
+<#if RequestParameters["kw"]?exists>
+<#assign kw>${RequestParameters["kw"]?html}</#assign>
+
+<#else>
+<#assign kw=""/>
+</#if>
+<#assign sqlWhere="(1=1)">
+<#if kw!=''>
+<#assign tpid="" />
+<#assign sqlWhere="${sqlWhere} and (name like '%${kw}%' or typename like '%${kw}%')">
+<#assign kw_link>&kw=${kw?url('utf-8')}</#assign>
+</#if>
+<body>
+  <#include "inc/header.html">
+  <#include "inc/banner.html">
+  
+  <div class="page-content">
+    <div class="wrap">
+ <#include "inc/position.html">
+      <#include "inc/nav.html">
+
+      <div class="public"> 
+
+       
+
+        <div class="${page}-area">
+
+         <div class="pro-result products-area">
+           <ul> 
+             <@mytag.ListProducts name="rows" orderby="sortid asc,id desc" sqlWhere="${sqlWhere}"  ctid="65535" pageMax="9"  classProFlag="1"  />
+             <#list rows as p>
+             <li>
+              <a href="${realpath}displayproducts.html?fid=${fid}&tpid=${tpid}&id=${p.id}" target="_blank">
+                <img src="${url}${p.small}" alt="${p.name}">
+                <h3>${p.name}</h3>
+              </a>
+            </li>
+
+            </#list>
+          </ul>
+        </div>
+        <#if rows?size==0>
+        <div class="no-result-info">
+          <h2><#if common_user_langid="1">很抱歉，暂无搜索结果！<#else>Sorry, no search results！</#if></h2>
+          <#if common_user_langid="1">
+          <a href="/">返回首页</a>
+          <#else>
+          <a href="/en/">Return home page</a>
+          </#if>
+        </div>
+        <#else>
+
+        <#include "inc/module_page_004.html"/>
+        <@module_page_004/>
+        
+        </#if>
+        <#--
+        <div class="news-result news-area">
+          <ul>
+            <@mytag.ListNews name="rows" orderby="sortid ASC,id desc"   ctid="65535"  pageMax="9">(title like '%${kw}%' or keyword like '%${kw}%')</@mytag.ListNews>
+            <#list rows as p>
+
+            <li>         
+              <div class="item"><span></span><a target="_blank" href="${realpath}displaynews.html?tpid=${tpid}&id=${p.id}">${p.title}</a><strong>${p.date}</strong></div>
+
+            </li>
+            </#list>
+          </ul>
+        </div>
+      -->
+
+
+    </div>
+
+  </div>
+</div>
+
+
+</div>
+
+
+
+<#include "inc/footer.html">
+
+</body>
+
+</html>
+
+

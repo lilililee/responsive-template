@@ -1,0 +1,18 @@
+<#if sys=="Introduce">
+<@mytag.viewIntroduce name="p" introID="${tpid}" /> 
+
+<#elseif sys=="Products">
+<@mytag.ViewProductsType name="p" proTypeID="${tpid}" ctid="${ctid}" />
+
+<#elseif sys=="Share">
+<@mytag.ViewShareType name="p" shareTypeID="${tpid}" ctid="${ctid}" />
+
+<#elseif sys=="News">
+<@mytag.ViewNewsType name="p" newsTypeID="${tpid}" ctid="${ctid}" />
+
+<#elseif sys=="ContactUs">
+<@mytag.viewContactUs name="p"  contactID="${tpid}"  />
+
+<#else>
+参数sys错误！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+</#if>

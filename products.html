@@ -1,0 +1,51 @@
+<#assign page="products"/>
+<#assign ctid="65535"/>
+<#assign sys="Products"/>
+<#assign cname="产品中心"/>
+<#assign ename="products"/>
+
+<#include "inc/head.html"> 
+<body>
+  <#include "inc/header.html">
+  <#include "inc/banner.html">
+  <#include "inc/responsive_menu.html">
+  <div class="page-content wrap">
+
+    <#include "inc/nav.html">
+
+    <div class="public"> 
+
+      <#include "inc/position.html">
+
+      <div class="${page}-area">
+      <#include "inc/setList.html">
+       <ul>
+        <#list rows as p>
+        <li>
+          <a href="${realpath}display${page}.html?tpid=${p.typeid}&id=${p.id}" target="_blank">
+            <img src="${p.small}" alt="${p.name}">
+            <h3>${p.name}</h3>         
+          </a>
+        </li>
+
+        </#list>
+      </ul>
+
+
+        <#include "inc/module_page_004.html"/>
+        <@module_page_004/>
+
+        
+      </div>
+
+    </div>
+
+  </div>
+
+  
+
+  <#include "inc/footer.html">
+
+</body>
+
+</html>

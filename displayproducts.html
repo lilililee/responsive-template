@@ -1,0 +1,47 @@
+<#assign page="displayproducts"/>
+<#assign ctid="65535"/>
+<#assign sys="Products"/>
+<#assign cname="产品中心"/>
+<#assign ename="products"/>
+
+<#include "inc/head.html"> 
+<body>
+  <#include "inc/header.html">
+  <#include "inc/banner.html">
+  <#include "inc/responsive_menu.html">
+  <div class="page-content wrap">
+
+    <#include "inc/nav.html">
+
+    <div class="public"> 
+
+      <#include "inc/position.html">
+
+      <div class="${page}-area">
+
+        <#include "inc/viewContent.html">
+        <div class="pro-brief">
+          <img src="${url}<#if p.big?has_content>${p.big}<#else>${p.small}</#if>" alt="">
+          <div class="pro-name">
+            ${p.name}
+          </div>
+        </div>
+        <div class="pro-detial">
+          ${p.note}
+        </div>
+
+
+       
+      </div>
+
+    </div>
+
+  </div>
+
+  
+
+  <#include "inc/footer.html">
+
+</body>
+
+</html>

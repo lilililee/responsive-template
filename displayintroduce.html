@@ -1,0 +1,84 @@
+<#assign page="displayintroduce"/>
+<#assign ctid="65535"/>
+<#assign sys="Introduce"/>
+<#assign cname="关于我们"/>
+<#assign ename="about us"/>
+
+<#include "inc/head.html">
+
+<body>
+  <#include "inc/header.html">
+  <#include "inc/banner.html">
+  <#include "inc/responsive_menu.html">
+  
+  <div class="page-content">
+    <div class="wrap">
+
+      <#include "inc/nav.html">
+
+      <div class="public"> 
+
+        <#include "inc/position.html">
+
+        <div class="${page}-area public-area">
+
+          <#if RequestParameters["id"]?exists>
+          <#assign id>${RequestParameters["id"]}</#assign>
+          <#else>
+          <#assign id="" />
+          </#if>
+
+          <#if RequestParameters["ctid"]?exists>
+          <#assign ctid>${RequestParameters["ctid"]}</#assign>
+          <#else>
+          <#assign ctid="" />
+          </#if>
+
+          <@mytag.ViewShare name="p" shareID="${id}" />
+
+          <div class="displayhonor-area">
+            <img src="${url}<#if p.big?has_content>${p.big}<#else>${p.small}</#if>" alt="${p.name}">
+            <h3>${p.name}</h3>
+          </div>
+
+          <#if common_user_langid="1">
+          <#assign prev_name="上一个："/>
+          <#else>
+          <#assign prev_name="Previous: "/>
+          </#if>
+          <#if common_user_langid="1">
+          <#assign next_name="下一个："/>
+          <#else>
+          <#assign next_name="Next: "/>
+          </#if>
+          <@mytag.viewNextRecordIdTag id="${id}" name="prev_id" typeId="" ctid="${ctid}" flag="2" orderby="sortid desc,id asc"/>
+          <@mytag.viewNextRecordIdTag id="${id}" name="next_id" typeId="" ctid="${ctid}" flag="2" orderby="sortid asc,id desc"/>
+
+          <div class="dis_page">
+            <div class="d_prev">
+              <@mytag.ViewShare name="prev_n" shareID="${prev_id}" />
+
+              <p><b>${prev_name}</b><#if prev_id!="0"><a href="${realpath}${page}.html?ctid=${ctid}&tpid=${tpid}&id=${prev_n.id}" title="${prev_n.name}">${prev_n.name}</a></p><#else><#if common_user_langid="1">已经是第一个了<#else>Already the first</#if></#if></div>
+              <div class="d_next">
+                <@mytag.ViewShare name="next_n" shareID="${next_id}" />
+                <p><b>${next_name}</b><#if next_id!="0"><a href="${realpath}${page}.html?ctid=${ctid}&tpid=${tpid}&id=${next_n.id}" title="${next_n.name}">${next_n.name}</a><#else><#if common_user_langid="1">已经是最后一个了<#else>Already the last</#if></#if></p></div>
+                <div class="clear"></div>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+    <#include "inc/footer.html">
+
+  </body>
+
+  </html>

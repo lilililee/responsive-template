@@ -1,0 +1,54 @@
+<#assign page="displaynews"/>
+<#assign ctid="65535"/>
+<#assign sys="News"/>
+<#assign cname="新闻中心"/>
+<#assign ename="news"/>
+
+<#include "inc/head.html">   
+<body>
+  <#include "inc/header.html">
+  <#include "inc/banner.html">
+  <#include "inc/responsive_menu.html">
+  <div class="page-content wrap">
+
+    <#include "inc/nav.html">
+
+
+    <div class="public"> 
+
+      <#include "inc/position.html">
+
+      <div class="${page}-area public-area">
+
+        <#include "inc/viewContent.html">
+        
+        <h3 class="title">${p.title}</h3>
+        <h4 class="brief">
+          <#if common_user_langid="1">
+          点击数： ${p.click}  &nbsp;&nbsp;发布时间： ${p.date}  &nbsp;&nbsp;信息来源： ${p.comefrom}
+          <#else>
+          click: ${p.click}  &nbsp;&nbsp;date: ${p.date}  &nbsp;&nbsp;source: ${p.comefrom}
+          </#if>
+        </h4>
+
+        <div class="text">${p.content}</div>
+
+
+
+        
+
+        <#include "inc/news_page.html">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  
+
+  <#include "inc/footer.html">
+
+</body>
+
+</html>

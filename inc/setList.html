@@ -1,0 +1,24 @@
+<#if sys=="Introduce">
+<@mytag.viewIntroduce name="p" introID="${tpid}" /> 
+
+<#elseif sys=="Products" && tpid=="">
+<@mytag.ListProducts name="rows" orderby="allsortid asc,id desc"   proTypeID="${tpid}" ctid="${ctid}"  pageMax="9" classProFlag="1"/>
+
+<#elseif sys=="Products">
+<@mytag.ListProducts name="rows" orderby="sortid asc,id desc"   proTypeID="${tpid}" ctid="${ctid}"  pageMax="9" classProFlag="1"/>
+
+<#elseif sys=="Share">
+<@mytag.ListShare name="rows" orderby="allsortid asc,id desc"   shareTypeID="${tpid}" ctid="${ctid}"  pageMax="9" classProFlag="1"/>
+
+<#elseif sys=="News" && tpid=="">
+<@mytag.ListNews name="rows" orderby="allsortid ASC,id desc"   newsTypeID="${tpid}" ctid="${ctid}"  pageMax="10" />
+
+<#elseif sys=="News">
+<@mytag.ListNews name="rows" orderby="sortid ASC,id desc"   newsTypeID="${tpid}" ctid="${ctid}"  pageMax="10" />
+
+<#elseif sys=="ContactUs">
+<@mytag.viewContactUs name="p"  contactID="${tpid}"  />
+
+<#else>
+参数sys错误！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+</#if>

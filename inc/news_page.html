@@ -1,0 +1,92 @@
+<div class="pagination-btn">
+<#if sys="News">
+<#if common_user_langid="1">
+<#assign prev_name="上一篇："/>
+<#else>
+<#assign prev_name="Previous: "/>
+</#if>
+<#if common_user_langid="1">
+<#assign next_name="下一篇："/>
+<#else>
+<#assign next_name="Next: "/>
+</#if>
+<@mytag.viewNextRecordIdTag id="${id}" name="prev_id" typeId="${tpid}" ctid="${ctid}" flag="1" orderby="sortid desc,id asc"/>
+<@mytag.viewNextRecordIdTag id="${id}" name="next_id" typeId="${tpid}" ctid="${ctid}" flag="1" orderby="sortid asc,id desc"/>
+
+<div class="page-turn">
+	<div class="page-prev"><@mytag.ViewNews name="prev_n" newsID="${prev_id}" />
+		<p><b>${prev_name}</b><#if prev_id!="0"><a href="${realpath}${page}.html?tpid=${prev_n.typeid}&id=${prev_n.id}" title="${prev_n.title}">${prev_n.title}</a></p><#else><#if common_user_langid="1">已经是第一篇了<#else>Already the first</#if></#if></div>
+		<div class="page-next"><@mytag.ViewNews name="next_n" newsID="${next_id}" />
+			<p><b>${next_name}</b><#if next_id!="0"><a href="${realpath}${page}.html?tpid=${next_n.typeid}&id=${next_n.id}" title="${next_n.title}">${next_n.title}</a><#else><#if common_user_langid="1">已经是最后一篇了<#else>Already the last</#if></#if></p></div>
+			<div class="clear"></div>
+		</div>
+
+		<div style="text-align:center;" class="page-print">
+			[<a href="javascript:window.print();"> <#if common_user_langid="1">打印本页<#else>Print</#if></a> ]　　　[<a href="javascript:window.close();"> <#if common_user_langid="1">关闭窗口<#else>Close</#if></a> ]
+		</div>
+	</div>
+</#if>
+
+
+<#if sys="Products">
+<#if common_user_langid="1">
+<#assign prev_name="上一个："/>
+<#else>
+<#assign prev_name="Previous: "/>
+</#if>
+<#if common_user_langid="1">
+<#assign next_name="下一个："/>
+<#else>
+<#assign next_name="Next: "/>
+</#if>
+<@mytag.viewNextRecordIdTag id="${id}" name="prev_id" typeId="${tpid}" ctid="${ctid}" flag="0" orderby="sortid desc,id asc"/>
+<@mytag.viewNextRecordIdTag id="${id}" name="next_id" typeId="${tpid}" ctid="${ctid}" flag="0" orderby="sortid asc,id desc"/>
+
+<div class="page-turn">
+	<div class="page-prev">
+		<@mytag.ViewProducts name="prev_n" proID="${prev_id}" />
+		<p><b>${prev_name}</b><#if prev_id!="0"><a href="${realpath}${page}.html?tpid=${prev_n.typeid}&id=${prev_n.id}" title="${prev_n.name}">${prev_n.name}</a></p><#else><#if common_user_langid="1">已经是第一个了<#else>Already the first</#if></#if></div>
+		<div class="page-next">
+		<@mytag.ViewProducts name="next_n" proID="${next_id}" />
+			<p><b>${next_name}</b><#if next_id!="0"><a href="${realpath}${page}.html?tpid=${next_n.typeid}&id=${next_n.id}" title="${next_n.name}">${next_n.name}</a><#else><#if common_user_langid="1">已经是最后一个了<#else>Already the last</#if></#if></p></div>
+			<div class="clear"></div>
+		</div>
+		<div style="text-align:center;" class="page-print">
+			[<a href="javascript:window.print();"> <#if common_user_langid="1">打印本页<#else>Print</#if></a> ]　　　[<a href="javascript:window.close();"> <#if common_user_langid="1">关闭窗口<#else>Close</#if></a> ]
+		</div>
+	</div>
+</#if>
+
+
+<#if sys="Share">
+<#if common_user_langid="1">
+<#assign prev_name="上一个："/>
+<#else>
+<#assign prev_name="Previous: "/>
+</#if>
+<#if common_user_langid="1">
+<#assign next_name="下一个："/>
+<#else>
+<#assign next_name="Next: "/>
+</#if>
+<@mytag.viewNextRecordIdTag id="${id}" name="prev_id" typeId="${tpid}" ctid="${ctid}" flag="2" orderby="sortid desc,id asc"/>
+<@mytag.viewNextRecordIdTag id="${id}" name="next_id" typeId="${tpid}" ctid="${ctid}" flag="2" orderby="sortid asc,id desc"/>
+
+<div class="page-turn">
+	<div class="page-prev">
+	<@mytag.ViewShare name="prev_n" shareID="${prev_id}" />
+	
+		<p><b>${prev_name}</b><#if prev_id!="0"><a href="${realpath}${page}.html?tpid=${prev_n.typeid}&id=${prev_n.id}" title="${prev_n.name}">${prev_n.name}</a></p><#else><#if common_user_langid="1">已经是第一个了<#else>Already the first</#if></#if></div>
+		<div class="page-next">
+		<@mytag.ViewShare name="next_n" shareID="${next_id}" />
+			<p><b>${next_name}</b><#if next_id!="0"><a href="${realpath}${page}.html?tpid=${next_n.typeid}&id=${next_n.id}" title="${next_n.name}">${next_n.name}</a><#else><#if common_user_langid="1">已经是最后一个了<#else>Already the last</#if></#if></p></div>
+			<div class="clear"></div>
+		</div>
+		<div style="text-align:center;" class="page-print">
+			[<a href="javascript:window.print();"> <#if common_user_langid="1">打印本页<#else>Print</#if></a> ]　　　[<a href="javascript:window.close();"> <#if common_user_langid="1">关闭窗口<#else>Close</#if></a> ]
+		</div>
+	</div>
+</#if>
+
+</div>
+

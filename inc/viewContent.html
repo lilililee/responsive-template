@@ -1,0 +1,25 @@
+<#if RequestParameters["id"]?exists>
+	<#assign id>${RequestParameters["id"]}</#assign>
+<#else>
+	<#assign id="" />
+</#if>
+
+
+<#if sys=="Introduce">
+<@mytag.viewIntroduce name="p" introID="${tpid}" /> 
+
+<#elseif sys=="Products">
+<@mytag.ViewProducts name="p" proID="${id}" />
+
+<#elseif sys=="Share">
+<@mytag.ViewShare name="p" shareID="${id}" />
+
+<#elseif sys=="News">
+<@mytag.ViewNews  name="p"  newsID="${id}" ctid="${tpid}" />
+
+<#elseif sys=="ContactUs">
+<@mytag.viewContactUs name="p"  contactID="${tpid}"  />
+
+<#else>
+参数sys错误！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+</#if>

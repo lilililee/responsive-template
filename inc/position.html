@@ -1,0 +1,22 @@
+
+<div class="position">
+	<#include "viewType.html">
+	<#assign title><#if sys=="Introduce" || sys=="ContactUs">${p.title}<#else>${p.name}</#if> </#assign>
+	<#if tpid=="">
+	<#assign title><#if common_user_langid="1">${cname}<#else>${ename}</#if></#assign>
+	</#if>
+
+	<div class="lt"><span> ${title}</span></div>
+	
+	<div class="rt">
+	<i class="iconfont icon-iconshouye"></i>
+	<#if common_user_langid="1">当前位置：<#else>Current position：</#if>  
+	<a href="${realpath}index.html"><#if common_user_langid="1">首页<#else>HOME</#if></a> > 
+	<a href="${realpath}${page?replace('display','')}.html"><#if common_user_langid="1">${cname}<#else>${ename}</#if></a>
+	<#if tpid!=""> > ${title}</#if></div>
+	
+
+	<div class="nav-phone">
+		<i class="iconfont icon-mulu-"></i>
+	</div>
+</div>

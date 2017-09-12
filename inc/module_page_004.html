@@ -1,0 +1,87 @@
+<#assign ppage>
+<#assign totalpage><@mytag.totalRecord /></#assign>
+<#assign pagenum><@mytag.pageMax /></#assign>
+<#assign nownums><@mytag.pageIndex /></#assign>
+<#if totalpage=="">
+<#assign totalpage="1"/>
+</#if>
+<#if pagenum=="">
+<#assign pagenum="1"/>
+</#if>
+<#if nownums=="">
+<#assign nownums="1"/>
+</#if>
+<@mytag.pageUrl name="pageUrl" isSave="true"/>
+<@mytag.pageParams name="pageParams" isSave="true"/>
+<#if totalpage?number%pagenum?number ==0>
+<#assign pagenumbers="${(totalpage?number/pagenum?number)?int}" />
+<#else>
+<#assign pagenumbers="${(totalpage?number/pagenum?number)?int+1}"  />
+</#if>  
+<select name="pageIndex1" id="pageIndex1" onchange="javascript:location.href='${pageUrl}?pageIndex='+this.options[selectedIndex].value+'${pageParams}'">
+  <#if totalpage !="" & totalpage!="0">
+  <#if pagenumbers?number !=0>
+  <#if pagenumbers?number < 200>
+  <#list 1..pagenumbers?number as i >
+  <option value="${i}"<#if i==nownums?number?int> selected</#if>>${i}</option>
+  <#if i==nownums?number+99>
+  <#break>
+  </#if>
+  </#list>
+  <#else>
+  <#list nownums?number..pagenumbers?number as i >
+  <option value="${i}"<#if i==nownums?number?int> selected</#if>>${i}</option>
+  <#if i==nownums?number+99>
+  <#break>
+  </#if>
+  </#list>
+  </#if>
+  <#else>
+  <option value="1">1</option>
+  </#if>
+  <#else>
+  <option value="1">1</option>
+  </#if>
+</select>
+</#assign>
+<#macro module_page_004 displayLength="10" hidedetailed="false">
+<@mytag.totalPage name="totalPage" isSave="true"/>
+<@mytag.pageIndex name="pageIndex" isSave="true"/>
+<@mytag.pageUrl name="pageUrl" isSave="true"/>
+<@mytag.pageParams name="pageParams" isSave="true"/>
+<@mytag.bundle fileName="shield" name="shield" />
+<#assign pageIndex=pageIndex?number />
+<#assign totalPage=totalPage?number />
+<#assign DisplayLength=displayLength?number />
+<div id="module_page_004">
+  <a class="first" href="${pageUrl}?pageIndex=1${pageParams}"><@mytag.message name='shield' key='page.first' /></a>
+  <a class="prev<#if pageIndex!=1>" href="<@mytag.previousPage /></#if>"><@mytag.message name='shield' key='page.previous' /></a>
+  <#if totalPage gt 0>
+  <@mytag.pageMultiple pageIndex="${pageIndex}" displayLength="${DisplayLength}" isSave="true" name="multiple"/>
+  <#assign multiple=multiple?number-1 />
+  <#if totalPage lt DisplayLength*multiple+DisplayLength>
+  <#list (DisplayLength*multiple+1)..totalPage as number>
+  <#if number%DisplayLength==1 && number-1!=0>
+  <a class="num" href="${pageUrl}?pageIndex=${number-1}${pageParams}">${number-1}</a>
+  </#if>
+  <a class="num <#if pageIndex==number>active</#if>" href="${pageUrl}?pageIndex=${number}${pageParams}">${number}</a>
+  </#list>
+  <#else>
+  <#list (DisplayLength*multiple+1)..(DisplayLength*multiple+DisplayLength) as number>
+  <a class="num <#if pageIndex==number>active</#if>" href="${pageUrl}?pageIndex=${number}${pageParams}<#if pageIndex==number>" class="active</#if>">${number}</a>
+  <#if number%DisplayLength==0 && number lt totalPage>
+  <a class="num <#if pageIndex==number>active</#if>" href="${pageUrl}?pageIndex=${number+1}${pageParams}">${number+1}</a>
+  </#if>
+  </#list>
+  </#if>
+  </#if>
+  <a class="next<#if totalPage!=pageIndex && totalPage!=0>" href="<@mytag.nextPage /></#if>"><@mytag.message name='shield' key='page.next' /></a>
+  <a class="last" href="${pageUrl}?pageIndex=${totalPage}${pageParams}"><@mytag.message name='shield' key='page.lastest' /></a>
+  ${ppage}<#if hidedetailed=="true">
+  <span><@mytag.message name='shield' key='page.others1' /><@mytag.totalRecord /><@mytag.message name='shield' key='page.others2' />　<@mytag.message name='shield' key='page.others3' /><#if totalPage==0>0<#else>${pageIndex}</#if>/${totalPage}<@mytag.message name='shield' key='page.others4' />　<@mytag.pageMax /><@mytag.message name='shield' key='page.others6' /></span>
+  </#if>
+</div>
+</#macro>
+
+
+

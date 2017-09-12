@@ -1,0 +1,49 @@
+<div class="banner">
+	
+	<#if page=="index">	
+	<ul class="banner-index">
+		<@mytag.ListShare name="rows" shareTypeID="54382"  orderby="sortid asc,id desc" frontRow="10"  ctid="105363" />
+		<#list rows as p>		
+
+		<li style="background: url(${url}${p.big}) center center no-repeat ;background-size: cover;">
+			
+		</li>
+
+
+		</#list>
+	</ul>
+
+	<#else>
+
+
+	<#if page=="products" || page=="displayproducts" >
+	<#assign shareTypeID="54419" />
+	<#elseif page=="news" || page=="displaynews">
+	<#assign shareTypeID="54423" />
+	<#elseif page=="introduce">
+	<#assign shareTypeID="54421" />
+	<#elseif page=="contactus">
+	<#assign shareTypeID="54422" />
+	<#else>
+	<#assign shareTypeID="54419" />
+	</#if>
+
+	
+	<ul class="banner-page">
+		<@mytag.ListShare name="rows" shareTypeID="${shareTypeID}"  orderby="sortid asc,id desc" frontRow="1"  ctid="105363" />
+		<#list rows as p>		
+
+		<li style="background: url(${url}${p.big}) center center no-repeat; background-size: cover;"></li>
+
+
+		</#list>
+	</ul>
+	</#if>
+	
+	<!-- 
+	<i class="iconfont icon-left to-left"></i>
+	<i class="iconfont icon-right to-right"></i> 
+	-->
+	
+
+</div>

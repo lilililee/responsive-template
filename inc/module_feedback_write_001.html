@@ -1,0 +1,857 @@
+
+<#macro module_feedback_write_001 sucessUrl="" failUrl="" ctid="65535" textareaWidth="50" sucessMessage="" failMessage="" isSendMail="false" receiveMailAddr="" mailSubject="" Encoding="GB2312">
+<@mytag.bundle fileName="shield" name="shield" />
+<#assign button_submit><@mytag.message name='shield' key='feedback.submit' /></#assign>
+<#assign button_reset><@mytag.message name='shield' key='feedback.reset' /></#assign>
+<@lang common_user_langid=common_user_langid dirPath=dirPath/>
+<@mytag.getDataCount tableName="feedback_property_view" > userid=${common_user_id} and langid=${common_user_langid} and ctid=${ctid} </@mytag.getDataCount>
+<@mytag.getFeedbackProperty ctid="${ctid}" name="feedbackProperty" selectFields="*" />
+<#assign mh><#if common_user_langid="1" || common_user_langid="2">：<#else>:</#if></#assign>
+<#assign msg><#if common_user_langid="1" || common_user_langid="2"><@mytag.message name='shield' key='global.isNotNull' />！<#else> <@mytag.message name='shield' key='global.isNotNull' />!</#if></#assign>
+<@html.form action="/front/action/feedback/saveFeedbackAction.do" enctype="multipart/form-data" method="post">
+
+<div id="feedbackTable">
+ <!--  <span>如果您遇到技术问题，请输入以下信息，我们的技术专员会和您取得联系！</span> -->
+ <#if feedbackProperty.ifdisplay_feedback_position?has_content && feedbackProperty.ifdisplay_feedback_position=="1">
+ <ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_position_isneed?exists && feedbackProperty.feedback_position_isneed=="1"></#if>
+    ${feedbackProperty.feedback_position}${mh}
+  </li>
+  <li class="input" style="width:414px"><input type="text" name="feedback_position" id="feedback_position" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_name?has_content && feedbackProperty.ifdisplay_feedback_name=="1">
+<ul class="clearfix" style="clear:both">
+  <li class="tn">
+    <#if feedbackProperty.feedback_name_isneed?exists && feedbackProperty.feedback_name_isneed=="1"></#if>
+    ${feedbackProperty.feedback_name}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name" id="feedback_name" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_sex?has_content && feedbackProperty.ifdisplay_feedback_sex=="1">
+<ul class="clearfix sexul">
+  <li class="tn">
+    <#if feedbackProperty.feedback_sex_isneed?exists && feedbackProperty.feedback_name_isneed=="1"></#if>
+    ${feedbackProperty.feedback_sex}${mh}
+  </li>
+  <li class="input">
+    <@html.radio value="男" property="feedback_sex"/>
+    <@mytag.message name="shield" key="feedback.sex.male" />
+    <span style="font-family:'宋体'"> </span>
+    <@html.radio value="女" property="feedback_sex"/>
+    <@mytag.message name="shield" key="feedback.sex.female" />
+  </li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_phone?has_content && feedbackProperty.ifdisplay_feedback_phone=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_phone_isneed?exists && feedbackProperty.feedback_phone_isneed=="1"></#if>
+    ${feedbackProperty.feedback_phone}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_phone" id="feedback_phone" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_company?has_content && feedbackProperty.ifdisplay_feedback_company=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_company_isneed?exists && feedbackProperty.feedback_company_isneed=="1"></#if>
+    ${feedbackProperty.feedback_company}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_company" id="feedback_company" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_fax?has_content && feedbackProperty.ifdisplay_feedback_fax=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_fax_isneed?exists && feedbackProperty.feedback_fax_isneed=="1"></#if>
+    ${feedbackProperty.feedback_fax}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_fax" id="feedback_fax" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_postalcode?has_content && feedbackProperty.ifdisplay_feedback_postalcode=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_postalcode_isneed?exists && feedbackProperty.feedback_postalcode_isneed=="1"></#if>
+    ${feedbackProperty.feedback_postalcode}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_postalcode" id="feedback_postalcode" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_email?has_content && feedbackProperty.ifdisplay_feedback_email=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_email_isneed?exists && feedbackProperty.feedback_email_isneed=="1"></#if>
+    ${feedbackProperty.feedback_email}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_email" id="feedback_email" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_address?has_content && feedbackProperty.ifdisplay_feedback_address=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_address_isneed?exists && feedbackProperty.feedback_address_isneed=="1"></#if>
+    ${feedbackProperty.feedback_address}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_address" id="feedback_address" value=""></li>
+</ul>
+</#if>
+
+<#if feedbackProperty.ifdisplay_feedback_website?has_content && feedbackProperty.ifdisplay_feedback_website=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_website_isneed?exists && feedbackProperty.feedback_website_isneed=="1"></#if>
+    ${feedbackProperty.feedback_website}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_website" id="feedback_website" value=""></li>
+</ul>
+</#if>
+
+<#if feedbackProperty.ifdisplay_feedback_type?has_content && feedbackProperty.ifdisplay_feedback_type=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_type_isneed?exists && feedbackProperty.feedback_type_isneed=="1"></#if>  
+    ${feedbackProperty.feedback_type}${mh}
+  </li>
+  <li class="input">
+    <@mytag.message name="shield" key="feedback.type.question" />
+    <@html.checkbox property="feedback_type" value="问题"/>
+    <@mytag.message name="shield" key="feedback.type.advice" />
+    <@html.checkbox property="feedback_type" value="建议"/>
+    <@mytag.message name="shield" key="feedback.type.complains" />
+    <@html.checkbox property="feedback_type" value="抱怨"/>
+    <@mytag.message name="shield" key="feedback.type.praise" />
+    <@html.checkbox property="feedback_type" value="表扬"/>
+  </li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_aspect?has_content && feedbackProperty.ifdisplay_feedback_aspect=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_aspect_isneed?exists && feedbackProperty.feedback_aspect_isneed=="1"></#if>
+    ${feedbackProperty.feedback_aspect}${mh}
+  </li>
+  <li class="input">
+    <@mytag.message name="shield" key="feedback.aspect.company" />
+    <@html.checkbox property="feedback_aspect" value="公司"/>
+    <@mytag.message name="shield" key="feedback.aspect.website" />
+    <@html.checkbox property="feedback_aspect" value="网站"/>
+    <@mytag.message name="shield" key="feedback.aspect.products" />
+    <@html.checkbox property="feedback_aspect" value="产品"/>
+    <@mytag.message name="shield" key="feedback.aspect.others" />
+    <@html.checkbox property="feedback_aspect" value="其他"/>
+  </li>
+</ul>
+</#if>
+<#if feedbackProperty.feedback_property_uploadfilename1display?has_content && feedbackProperty.feedback_property_uploadfilename1display=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.feedback_property_uploadfilename1_isneed?exists && feedbackProperty.feedback_property_uploadfilename1_isneed=="1"></#if>
+    ${feedbackProperty.feedback_property_uploadfilename1}${mh}
+  </li>
+  <li class="input"><@html.file property="upfile1" /></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name1?has_content && feedbackProperty.ifdisplay_name1=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name1_isneed?exists && feedbackProperty.name1_isneed=="1"></#if>
+    ${feedbackProperty.name1}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name1" id="feedback_name1" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name2?has_content && feedbackProperty.ifdisplay_name2=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name2_isneed?exists && feedbackProperty.name2_isneed=="1"></#if>
+    ${feedbackProperty.name2}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name2" id="feedback_name2" value=""></li>
+</ul>
+</#if>
+
+
+<#if feedbackProperty.ifdisplay_name3?has_content && feedbackProperty.ifdisplay_name3=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name3_isneed?exists && feedbackProperty.name3_isneed=="1"></#if>
+    ${feedbackProperty.name3}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name3" id="feedback_name3" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name4?has_content && feedbackProperty.ifdisplay_name4=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name4_isneed?exists && feedbackProperty.name4_isneed=="1"></#if>
+    ${feedbackProperty.name4}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name4" id="feedback_name4" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name5?has_content && feedbackProperty.ifdisplay_name5=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name5_isneed?exists && feedbackProperty.name5_isneed=="1"></#if>
+    ${feedbackProperty.name5}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name5" id="feedback_name5" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name6?has_content && feedbackProperty.ifdisplay_name6=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name6_isneed?exists && feedbackProperty.name6_isneed=="1"></#if>
+    ${feedbackProperty.name6}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name6" id="feedback_name6" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name7?has_content && feedbackProperty.ifdisplay_name7=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name7_isneed?exists && feedbackProperty.name7_isneed=="1"></#if>       
+    ${feedbackProperty.name7}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name7" id="feedback_name7" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name8?has_content && feedbackProperty.ifdisplay_name8=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name8_isneed?exists && feedbackProperty.name8_isneed=="1"></#if>
+    ${feedbackProperty.name8}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name8" id="feedback_name8" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name9?has_content && feedbackProperty.ifdisplay_name9=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name9_isneed?exists && feedbackProperty.name9_isneed=="1"></#if>
+    ${feedbackProperty.name9}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name9" id="feedback_name9" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name10?has_content && feedbackProperty.ifdisplay_name10=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name10_isneed?exists && feedbackProperty.name10_isneed=="1"></#if>
+    ${feedbackProperty.name10}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name10" id="feedback_name10" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name11?has_content && feedbackProperty.ifdisplay_name11=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name11_isneed?exists && feedbackProperty.name11_isneed=="1"></#if>
+    ${feedbackProperty.name11}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name11" id="feedback_name11" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name12?has_content && feedbackProperty.ifdisplay_name12=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name12_isneed?exists && feedbackProperty.name12_isneed=="1"></#if>
+    ${feedbackProperty.name12}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name12" id="feedback_name12" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name13?has_content && feedbackProperty.ifdisplay_name13=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name13_isneed?exists && feedbackProperty.name13_isneed=="1"></#if>
+    ${feedbackProperty.name13}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name13" id="feedback_name13" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name14?has_content && feedbackProperty.ifdisplay_name14=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name14_isneed?exists && feedbackProperty.name14_isneed=="1"></#if>
+    ${feedbackProperty.name14}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name14" id="feedback_name14" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name15?has_content && feedbackProperty.ifdisplay_name15=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name15_isneed?exists && feedbackProperty.name15_isneed=="1"></#if>
+    ${feedbackProperty.name15}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name15" id="feedback_name15" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name16?has_content && feedbackProperty.ifdisplay_name16=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name16_isneed?exists && feedbackProperty.name16_isneed=="1"></#if>
+    ${feedbackProperty.name16}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name16" id="feedback_name16" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name17?has_content && feedbackProperty.ifdisplay_name17=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name17_isneed?exists && feedbackProperty.name17_isneed=="1"></#if>
+    ${feedbackProperty.name17}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name17" id="feedback_name17" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name18?has_content && feedbackProperty.ifdisplay_name18=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name18_isneed?exists && feedbackProperty.name18_isneed=="1"></#if>
+    ${feedbackProperty.name18}${mh}
+  </li>
+  <li class="input"><input type="text" name="feedback_name18" id="feedback_name18" value=""></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_feedback_content?has_content && feedbackProperty.ifdisplay_feedback_content=="1">
+<ul class="clearfix contentul" style="clear:both">
+  <li class="tn">
+    <#if feedbackProperty.feedback_content_isneed?exists && feedbackProperty.feedback_content_isneed=="1"></#if>
+    ${feedbackProperty.feedback_content}${mh}
+  </li>
+  <li class="textarea"><textarea name="feedback_content" id="feedback_content"></textarea></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name19?has_content && feedbackProperty.ifdisplay_name19=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name19_isneed?exists && feedbackProperty.name19_isneed=="1"></#if>
+    ${feedbackProperty.name19}${mh}
+  </li>
+  <li class="textarea"><textarea property="feedback_name19"></textarea></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name20?has_content && feedbackProperty.ifdisplay_name20=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name20_isneed?exists && feedbackProperty.name20_isneed=="1"></#if>
+    ${feedbackProperty.name20}${mh}
+  </li>
+  <li class="textarea"><textarea property="feedback_name20"></textarea></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name21?has_content && feedbackProperty.ifdisplay_name21=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name21_isneed?exists && feedbackProperty.name21_isneed=="1"></#if>
+    ${feedbackProperty.name21}${mh}
+  </li>
+  <li class="textarea"><textarea property="feedback_name21"></textarea></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name22?has_content && feedbackProperty.ifdisplay_name22=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name22_isneed?exists && feedbackProperty.name22_isneed=="1"></#if>
+    ${feedbackProperty.name22}${mh}
+  </li>
+  <li class="textarea"><textarea property="feedback_name22"></textarea></li>
+</ul>
+</#if>
+<#if feedbackProperty.ifdisplay_name23?has_content && feedbackProperty.ifdisplay_name23=="1">
+<ul class="clearfix">
+  <li class="tn">
+    <#if feedbackProperty.name23_isneed?exists && feedbackProperty.name23_isneed=="1"></#if>
+    ${feedbackProperty.name23}${mh}
+  </li>
+  <li class="textarea"><textarea property="feedback_name23"></textarea></li>
+</ul>
+</#if>
+<ul class="clearfix codeul">
+  <li class="tn">
+    <@mytag.message name="shield" key="feedback.validateCode" />${mh}
+  </li>
+  <li class="input postcode"><input type="text" name="postcode" id="feedback_postcode" value="" maxlength="6"><img style="vertical-align: middle;cursor: pointer;" src="/displayCodeAction.do?fontSize=18&picHeight=20&fontY=16&codeLength=4&picWidth=65&charset=0-9" name="iii" id="iii" onClick="this.setAttribute('src','/displayCodeAction.do?fontSize=18&picHeight=20&fontY=16&codeLength=4&picWidth=65&charset=0-9'+Math.random())"></li>
+  
+</ul>
+<ul class="clearfix buttonul" style="clear:both; float:none">
+  <li class="button">
+    <input type="submit" name="Submit" class="submit" id="feedback_submit" value="${button_submit}" onclick="return check();">
+    <input type="reset" name="Submit" class="reset" id="feedback_reset" value="${button_reset}">
+  </li>
+</ul>
+<input type="hidden" id="uploadFileName" name="uploadFileName" value="">
+<input type="hidden" id="savePath" name="savePath" value="${common_user_images}">
+<input type="hidden" id="userid" name="userid" value="${common_user_id}">
+<input type="hidden" id="langid" name="langid" value="${common_user_langid}">
+<input type="hidden" id="custom_id" name="custom_id" value="${ctid}">
+<input type="hidden" id="feedback_sucessUrl" name="feedback_sucessUrl" value="${sucessUrl}">
+<input type="hidden" id="feedback_failUrl" name="feedback_failUrl" value="${failUrl}">
+<input type="hidden" id="sucessMessage" name="sucessMessage" value="${sucessMessage}">
+<input type="hidden" id="failMessage" name="failMessage" value="${failMessage}">
+<input type="hidden" id="mailContent" name="mailContent" value="">
+<input type="hidden" id="receiveMailAddr" name="receiveMailAddr" value="${receiveMailAddr}">
+<input type="hidden" id="mailSubject" name="mailSubject" value="${mailSubject}">
+<input type="hidden" id="Encoding" name="Encoding" value="${Encoding}">
+</div>
+</@html.form>
+
+<script>
+  <#if isSendMail=="true">
+  jQuery("#feedbackTable").live("blur",function(){                 
+   jQuery("input:text").each(function(){                  
+    var idobj=jQuery(this).attr("id");                 
+    var dd=jQuery(this).val();      
+    if(document.getElementById(idobj))
+     document.getElementById(idobj).setAttribute("value", dd);
+ });
+   jQuery("textarea").each(function () {
+    var idobj = jQuery(this).attr("id");
+    var dd = jQuery(this).val();
+    jQuery(this).text(dd);
+  });
+   jQuery("input:radio:checked").each(function () {
+    var idobj = jQuery(this).attr("id");
+    if(document.getElementById(idobj))
+     document.getElementById(idobj).setAttribute("checked", "checked");
+ });
+   jQuery("input:checkbox:checked").each(function () {
+    var idobj = jQuery(this).attr("id");
+    if(document.getElementById(idobj))
+     document.getElementById(idobj).setAttribute("checked", "checked");
+ }); 
+   jQuery("select option:selected").each(function () {
+    var idobj = jQuery(this).attr("id");
+    if(idobj!='' && document.getElementById(idobj))
+     document.getElementById(idobj).setAttribute("selected", "selected");
+ });
+ });
+  </#if>
+  function check(){
+    <#if feedbackProperty.feedback_position_isneed?exists && feedbackProperty.feedback_position_isneed=="1">
+    if(feedbackActionForm.feedback_position.value=='' || feedbackActionForm.feedback_position.value=='${feedbackProperty.feedback_position}'){
+      alert("${feedbackProperty.feedback_position}${msg}");
+      feedbackActionForm.feedback_position.focus();
+      return false;
+    }
+    </#if>
+    <#if feedbackProperty.feedback_name_isneed?exists && feedbackProperty.feedback_name_isneed=="1">
+    if(feedbackActionForm.feedback_name.value=='' || feedbackActionForm.feedback_name.value=='${feedbackProperty.feedback_name}'){
+      alert("${feedbackProperty.feedback_name}${msg}");
+      feedbackActionForm.feedback_name.focus();
+      return false;
+    }
+    </#if>
+    <#if feedbackProperty.feedback_company_isneed?exists && feedbackProperty.feedback_company_isneed=="1">
+    if(feedbackActionForm.feedback_company.value=='' || feedbackActionForm.feedback_company.value=='${feedbackProperty.feedback_company}'){
+      alert("${feedbackProperty.feedback_company}${msg}");
+      feedbackActionForm.feedback_company.focus();
+      return false;
+    }
+    </#if>
+    <#if feedbackProperty.feedback_email_isneed?exists && feedbackProperty.feedback_email_isneed=="1">
+    if(feedbackActionForm.feedback_email.value=='' || feedbackActionForm.feedback_email.value=='${feedbackProperty.feedback_email}'){
+      alert("${feedbackProperty.feedback_email}${msg}");
+      feedbackActionForm.feedback_email.focus();
+      return false;
+    }
+    if(feedbackActionForm.feedback_email.value!=""){
+      if(feedbackActionForm.feedback_email.value.indexOf ('@')==-1 || feedbackActionForm.feedback_email.value.indexOf ('.')==-1){
+        alert("<@mytag.message name='shield' key='feedback.checkEmailCorrect' />"); 
+        feedbackActionForm.feedback_email.focus(); 
+        return false;
+      }
+    }
+    </#if>
+    <#if feedbackProperty.feedback_phone_isneed?exists && feedbackProperty.feedback_phone_isneed=="1">
+    if(feedbackActionForm.feedback_phone.value=='' || feedbackActionForm.feedback_phone.value=='${feedbackProperty.feedback_phone}'){
+      alert("${feedbackProperty.feedback_phone}${msg}");
+      feedbackActionForm.feedback_phone.focus();
+      return false;
+    }
+    </#if>
+    <#if feedbackProperty.feedback_fax_isneed?exists && feedbackProperty.feedback_fax_isneed=="1">
+    if(feedbackActionForm.feedback_fax.value=='' || feedbackActionForm.feedback_fax.value=='${feedbackProperty.feedback_fax}'){
+      alert("${feedbackProperty.feedback_fax}${msg}");
+      feedbackActionForm.feedback_fax.focus();
+      return false;
+    }
+    </#if>
+    <#if feedbackProperty.feedback_website_isneed?exists && feedbackProperty.feedback_website_isneed=="1">
+    if(feedbackActionForm.feedback_website.value=='' || feedbackActionForm.feedback_website.value=='${feedbackProperty.feedback_website}'){
+      alert("${feedbackProperty.feedback_website}${msg}");
+      feedbackActionForm.feedback_website.focus();
+      return false;
+    }
+    </#if>
+    <#if feedbackProperty.feedback_postalcode_isneed?exists && feedbackProperty.feedback_postalcode_isneed=="1">
+    if(feedbackActionForm.feedback_postalcode.value=='' || feedbackActionForm.feedback_postalcode.value=='${feedbackProperty.feedback_postalcode}'){
+      alert("${feedbackProperty.feedback_postalcode}${msg}");
+      feedbackActionForm.feedback_postalcode.focus();
+      return false;
+    }
+    </#if>
+    <#if feedbackProperty.feedback_address_isneed?exists && feedbackProperty.feedback_address_isneed=="1">
+    if(feedbackActionForm.feedback_address.value=='' || feedbackActionForm.feedback_address.value=='${feedbackProperty.feedback_address}'){
+      alert("${feedbackProperty.feedback_address}${msg}");
+      feedbackActionForm.feedback_address.focus();
+      return false;
+    }
+    </#if>
+    <#if feedbackProperty.feedback_content_isneed?exists && feedbackProperty.feedback_content_isneed=="1">
+    if(feedbackActionForm.feedback_content.value=='' || feedbackActionForm.feedback_content.value=='${feedbackProperty.feedback_content}'){
+      alert("${feedbackProperty.feedback_content}${msg}");
+      feedbackActionForm.feedback_content.focus();
+      return false;
+    }
+    </#if>
+    <#if feedbackProperty.feedback_type_isneed?exists && feedbackProperty.feedback_type_isneed=="1">
+    var haveFeedbackType=0;
+    for(i=0;i<feedbackActionForm.elements.length;i++){
+     if(feedbackActionForm.elements[i].name=="feedback_type"){
+       if(feedbackActionForm.elements[i].checked==true){
+        haveFeedbackType=1;
+        break;
+      }
+    }
+  }
+  if(haveFeedbackType==0){
+    alert("${feedbackProperty.feedback_type}${msg}");
+    return false;
+  }
+  </#if>
+  <#if feedbackProperty.feedback_aspect_isneed?exists && feedbackProperty.feedback_aspect_isneed=="1">  
+  var haveFeedbackAspect=0;
+  for(i=0;i<feedbackActionForm.elements.length;i++){
+   if(feedbackActionForm.elements[i].name=="feedback_aspect"){
+     if(feedbackActionForm.elements[i].checked==true){
+      haveFeedbackAspect=1;
+      break;
+    }
+  }
+}
+if(haveFeedbackAspect==0){
+  alert("${feedbackProperty.feedback_aspect}${msg}");
+  return false;
+}
+</#if>
+<#if (feedbackProperty.feedback_property_uploadfilename1display?has_content) && feedbackProperty.feedback_property_uploadfilename1display=="1">
+var upload_file=feedbackActionForm.upfile1.value;
+if(upload_file==""){
+  <#if feedbackProperty.feedback_property_uploadfilename1_isneed?exists && feedbackProperty.feedback_property_uploadfilename1_isneed=="1">
+  alert("${feedbackProperty.feedback_property_uploadfilename1}${msg}");
+  return false;
+  </#if>
+}
+else{
+  var index = upload_file.lastIndexOf("\\");
+  var file_name = upload_file.substring(index+1);
+  document.getElementById("uploadFileName").value=file_name;
+}
+</#if>
+<#if feedbackProperty.name1_isneed?exists && feedbackProperty.name1_isneed=="1">
+if(feedbackActionForm.feedback_name1.value=='' || feedbackActionForm.feedback_name1.value=='${feedbackProperty.name1}'){
+  alert("${feedbackProperty.name1}${msg}");
+  feedbackActionForm.feedback_name1.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name2_isneed?exists && feedbackProperty.name2_isneed=="1">
+if(feedbackActionForm.feedback_name2.value=='' || feedbackActionForm.feedback_name2.value=='${feedbackProperty.name2}'){
+  alert("${feedbackProperty.name2}${msg}");
+  feedbackActionForm.feedback_name2.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name3_isneed?exists && feedbackProperty.name3_isneed=="1">
+if(feedbackActionForm.feedback_name3.value=='' || feedbackActionForm.feedback_name3.value=='${feedbackProperty.name3}'){
+  alert("${feedbackProperty.name3}${msg}");
+  feedbackActionForm.feedback_name3.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name4_isneed?exists && feedbackProperty.name4_isneed=="1">
+if(feedbackActionForm.feedback_name4.value=='' || feedbackActionForm.feedback_name4.value=='${feedbackProperty.name4}'){
+  alert("${feedbackProperty.name4}${msg}");
+  feedbackActionForm.feedback_name4.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name5_isneed?exists && feedbackProperty.name5_isneed=="1">
+if(feedbackActionForm.feedback_name5.value=='' || feedbackActionForm.feedback_name5.value=='${feedbackProperty.name5}'){
+  alert("${feedbackProperty.name5}${msg}");
+  feedbackActionForm.feedback_name5.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name6_isneed?exists && feedbackProperty.name6_isneed=="1">
+if(feedbackActionForm.feedback_name6.value=='' || feedbackActionForm.feedback_name6.value=='${feedbackProperty.name6}'){
+  alert("${feedbackProperty.name6}${msg}");
+  feedbackActionForm.feedback_name6.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name7_isneed?exists && feedbackProperty.name7_isneed=="1">
+if(feedbackActionForm.feedback_name7.value=='' || feedbackActionForm.feedback_name7.value=='${feedbackProperty.name7}'){
+  alert("${feedbackProperty.name7}${msg}");
+  feedbackActionForm.feedback_name7.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name8_isneed?exists && feedbackProperty.name8_isneed=="1">
+if(feedbackActionForm.feedback_name8.value=='' || feedbackActionForm.feedback_name8.value=='${feedbackProperty.name8}'){
+  alert("${feedbackProperty.name8}${msg}");
+  feedbackActionForm.feedback_name8.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name9_isneed?exists && feedbackProperty.name9_isneed=="1">
+if(feedbackActionForm.feedback_name9.value=='' || feedbackActionForm.feedback_name9.value=='${feedbackProperty.name9}'){
+  alert("${feedbackProperty.name9}${msg}");
+  feedbackActionForm.feedback_name9.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name10_isneed?exists && feedbackProperty.name10_isneed=="1">
+if(feedbackActionForm.feedback_name10.value=='' || feedbackActionForm.feedback_name10.value=='${feedbackProperty.name10}'){
+  alert("${feedbackProperty.name10}${msg}");
+  feedbackActionForm.feedback_name10.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name11_isneed?exists && feedbackProperty.name11_isneed=="1">
+if(feedbackActionForm.feedback_name11.value=='' || feedbackActionForm.feedback_name11.value=='${feedbackProperty.name11}'){
+  alert("${feedbackProperty.name11}${msg}");
+  feedbackActionForm.feedback_name11.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name12_isneed?exists && feedbackProperty.name12_isneed=="1">
+if(feedbackActionForm.feedback_name12.value=='' || feedbackActionForm.feedback_name12.value=='${feedbackProperty.name12}'){
+  alert("${feedbackProperty.name12}${msg}");
+  feedbackActionForm.feedback_name12.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name13_isneed?exists && feedbackProperty.name13_isneed=="1">
+if(feedbackActionForm.feedback_name13.value=='' || feedbackActionForm.feedback_name13.value=='${feedbackProperty.name13}'){
+  alert("${feedbackProperty.name13}${msg}");
+  feedbackActionForm.feedback_name13.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name14_isneed?exists && feedbackProperty.name14_isneed=="1">
+if(feedbackActionForm.feedback_name14.value=='' || feedbackActionForm.feedback_name14.value=='${feedbackProperty.name14}'){
+  alert("${feedbackProperty.name14}${msg}");
+  feedbackActionForm.feedback_name14.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name15_isneed?exists && feedbackProperty.name15_isneed=="1">
+if(feedbackActionForm.feedback_name15.value=='' || feedbackActionForm.feedback_name15.value=='${feedbackProperty.name15}'){
+  alert("${feedbackProperty.name15}${msg}");
+  feedbackActionForm.feedback_name15.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name16_isneed?exists && feedbackProperty.name16_isneed=="1">
+if(feedbackActionForm.feedback_name16.value=='' || feedbackActionForm.feedback_name16.value=='${feedbackProperty.name16}'){
+  alert("${feedbackProperty.name16}${msg}");
+  feedbackActionForm.feedback_name16.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name17_isneed?exists && feedbackProperty.name17_isneed=="1">
+if(feedbackActionForm.feedback_name17.value=='' || feedbackActionForm.feedback_name17.value=='${feedbackProperty.name17}'){
+  alert("${feedbackProperty.name17}${msg}");
+  feedbackActionForm.feedback_name17.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name18_isneed?exists && feedbackProperty.name18_isneed=="1">
+if(feedbackActionForm.feedback_name18.value=='' || feedbackActionForm.feedback_name18.value=='${feedbackProperty.name18}'){
+  alert("${feedbackProperty.name18}${msg}");
+  feedbackActionForm.feedback_name18.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.feedback_content_isneed?exists && feedbackProperty.feedback_content_isneed=="1">
+if(feedbackActionForm.feedback_content.value=="" || feedbackActionForm.feedback_content.value=="${feedbackProperty.feedback_content}"){
+  alert("${feedbackProperty.feedback_content}${msg}");
+  feedbackActionForm.feedback_content.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name19_isneed?exists && feedbackProperty.name19_isneed=="1">
+if(feedbackActionForm.feedback_name19.value=='' || feedbackActionForm.feedback_name19.value=='${feedbackProperty.name19}'){
+  alert("${feedbackProperty.name19}${msg}");
+  feedbackActionForm.feedback_name19.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name20_isneed?exists && feedbackProperty.name20_isneed=="1">
+if(feedbackActionForm.feedback_name20.value=='' || feedbackActionForm.feedback_name20.value=='${feedbackProperty.name20}'){
+  alert("${feedbackProperty.name20}${msg}");
+  feedbackActionForm.feedback_name20.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name21_isneed?exists && feedbackProperty.name21_isneed=="1">
+if(feedbackActionForm.feedback_name21.value=='' || feedbackActionForm.feedback_name21.value=='${feedbackProperty.name21}'){
+  alert("${feedbackProperty.name21}${msg}");
+  feedbackActionForm.feedback_name21.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name22_isneed?exists && feedbackProperty.name22_isneed=="1">
+if(feedbackActionForm.feedback_name22.value=='' || feedbackActionForm.feedback_name22.value=='${feedbackProperty.name22}'){
+  alert("${feedbackProperty.name22}${msg}");
+  feedbackActionForm.feedback_name22.focus();
+  return false;
+}
+</#if>
+<#if feedbackProperty.name23_isneed?exists && feedbackProperty.name23_isneed=="1">
+if(feedbackActionForm.feedback_name23.value=='' || feedbackActionForm.feedback_name23.value=='${feedbackProperty.name23}'){
+  alert("${feedbackProperty.name23}${msg}");
+  feedbackActionForm.feedback_name23.focus();
+  return false;
+}
+</#if>
+if(feedbackActionForm.postcode.value=='' || feedbackActionForm.postcode.value=='<@mytag.message name='shield' key='feedback.validateCode' />'){
+  alert("<@mytag.message name='shield' key='feedback.validateCode' />${msg}");
+  feedbackActionForm.postcode.focus();
+  return false;
+}
+<#if isSendMail=="true">
+var allElements = document.feedbackActionForm.elements;
+for(i=0;i<allElements.length;i++){
+  if(allElements[i].type!="submit"&&allElements[i].type!="select-one"){
+    allElements[i].readonly="readonly";
+  }
+}
+var css='<style>.postcode{display:none;}</style>'
+var content = document.getElementById("feedbackTable").innerHTML;  
+document.getElementById("mailContent").value=css+content;
+</#if>
+return true;
+}
+
+
+
+</script>
+
+
+</#macro>
+
+
+<style>
+  #feedbackTable {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+    padding-top: 30px;
+    background: #F5F5F5;
+  }
+  #feedbackTable ul {
+    width: 50%;
+    float: left;
+    padding: 8px 10px;
+  }
+  #feedbackTable ul .tn {
+    width: 30%;
+    float: left;
+    line-height: 25px;
+    text-align: right;
+    padding-right: 20px;
+  }
+  #feedbackTable ul .input {
+    width: 70%;
+    float: left;
+  }
+  #feedbackTable .contentul {
+    width: 100%;
+  }
+  #feedbackTable .contentul .tn {
+    width: 14.6%;
+  }
+  #feedbackTable .contentul .textarea {
+    width: 85.4%;
+    float: left;
+  }
+  #feedbackTable .contentul textarea {
+    width: 100%;
+    height: 120px;
+    resize: none;
+    float: left;
+  }
+  #feedbackTable .codeul {
+    width: 100%;
+  }
+  #feedbackTable .codeul .tn {
+    width: 15%;
+  }
+  #feedbackTable .codeul .postcode {
+    width: 85%;
+    float: left;
+  }
+  #feedbackTable .codeul .postcode input {
+    width: 40.3%;
+    margin-left: -2px;
+  }
+  #feedbackTable .codeul img {
+    margin-left: 20px;
+  }
+  #feedbackTable .buttonul {
+    width: 100%;
+    text-align: center;
+  }
+  #feedbackTable .buttonul input {
+    width: 100px;
+    height: 25px;
+    margin: 20px;
+    cursor: pointer;
+  }
+  #feedbackTable .sexul input {
+    width: 15%;
+    height: 15px;
+    vertical-align: -3px;
+  }
+  #feedbackTable .hiddenul {
+    visibility: hidden;
+  }
+  #feedbackTable input, #feedbackTable select, #feedbackTable textarea {
+    width: 100%;
+    height: 25px;
+    outline: none;
+    border: 1px solid #ddd;
+  }
+
+  @media (max-width: 768px) {
+    #feedbackTable ul {
+      width: 100%;
+    }
+
+
+    #feedbackTable ul .tn,
+    #feedbackTable .contentul .tn,
+    #feedbackTable .codeul .tn{
+      width: 35%;
+      text-align: left;
+    }
+
+    #feedbackTable ul .input,
+    #feedbackTable .contentul .textarea,
+    #feedbackTable .codeul .postcode {
+      width: 65%;
+    }
+
+    
+  }
+
+</style>

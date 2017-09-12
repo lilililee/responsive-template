@@ -1,0 +1,54 @@
+
+<#if nav_sys=="Introduce">
+<@mytag.listIntroduce    name="rows" orderby="sortid asc,id desc" ctid="${nav_ctid}"/>
+
+<#elseif nav_sys=="Products">
+<@mytag.ListProductsType name="rows" orderby="sortid asc,id desc"  ctid="${nav_ctid}"/>
+
+<#elseif nav_sys=="Share">
+<@mytag.ListShareType    name="rows" orderby="sortid asc,id desc"  ctid="${nav_ctid}"/>
+
+<#elseif nav_sys=="News">
+<@mytag.ListNewsType     name="rows" orderby="sortid asc,id desc" ctid="${nav_ctid}"/>
+
+<#elseif nav_sys=="ContactUs">
+<@mytag.listContactUs    name="rows" orderby="sortid asc,id desc" ctid="${nav_ctid}"/>
+
+<#else>
+参数nav_sys错误！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+</#if>
+<div class="header-dl-area">
+	<#list rows as p>
+	<dl>
+		<dt>
+			
+			<a href="${realpath}${nav_page}.html?tpid=${p.id}">
+				<#if nav_sys=="Introduce" || nav_sys=="ContactUs">${p.title}<#else>${p.name}</#if>
+			</a>
+			
+
+
+		</dt>
+		<#if p.child?exists && p.child !="0">
+		
+		<#if nav_sys=="Products">
+		<@mytag.ListProductsType name="items" orderby="sortid asc,id desc"  ctid="${ctid}" fid="${p.id}"/>
+
+		<#elseif nav_sys=="Share">
+		<@mytag.ListShareType    name="items" orderby="sortid asc,id desc"  ctid="${ctid}" fid="${p.id}"/>
+
+		<#elseif nav_sys=="News">
+		<@mytag.ListNewsType     name="items" orderby="sortid asc,id desc" ctid="${ctid}" fid="${p.id}"/>
+		</#if>
+		<div class="header-dd-area">
+			<#list items as item>
+			<dd>
+				<a href="${realpath}${nav_page}.html?fid=${p.id}&tpid=${item.id}">${item.name}</a>
+			</dd>
+			
+			</#list>
+		</div>
+		</#if>
+	</dl>
+	</#list>
+</div>
